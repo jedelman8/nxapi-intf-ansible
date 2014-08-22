@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+
+import xmltodict
+import json
+import yaml
+import sys
+from nxapi.device1 import Device
+from nxapi.widgets import ethports
+
+def main():
+  module = AnsibleModule(
+    argument_spec = dict(
+      ip=dict(required=True),
+      interface=dict(required=True)
+    ),
+    supports_check_mode = False
+  )
+
+  ip = module.params['ip']
+  interface = module.params['interface']
+  
+  globals().update(yaml.load(open('/home/cisco/apps/nxapi/library/tv-test/ethport.yml').read()))
+  
+  if not interface == 'all':
+    command = EthPortTable['command'] + interface
+  else: 
+    command = EthPortTable['command']
+  
+  table = EthPortTable['table']
+  row = EthPortTable['row']
+
+  dev = Device(ip)
+  dev.open()
+  
+  xmlData = dev.showc(command)
+
+  result = xmltodict.parse(xmlData[1])
+
+  subdata =  result['ins_api']['outputs']['output']['body'][table][row]
+  
+  ports = ethports()
+
+  if table == 'TABLE_interface':
+    interfaces = ports.interface_table(subdata)
+
+  #print interfaces['Ethernet1/1']['mac_addr']
+
+  module.exit_json(stats=interfaces)
+  
+from ansible.module_utils.basic import *  
+main()

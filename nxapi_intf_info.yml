@@ -1,0 +1,17 @@
+---
+
+- name: get stats from interface(s) on nexus 9000
+  hosts: n9k
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: get interface stats
+    intf_stats: 
+      ip={{ inventory_hostname }}
+      interface=Ethernet1/4
+    register: results  
+
+  - name: prepare report based on template
+    template: src=templates/interface_stats.j2 dest=reports/{{ inventory_hostname }}.stats

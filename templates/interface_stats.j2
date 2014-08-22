@@ -1,0 +1,16 @@
+************************************************************
+
+Interface Statistics for {{ inventory_hostname }} 
+
+************************************************************
+
+{% for key, value in results.stats.iteritems() %}
+Interface {{ key }}
+  {% for k,v in value.iteritems() %}
+   {{ k }}: {{ v }} 
+  {% endfor %}     
+{% endfor %}
+
+
+
+

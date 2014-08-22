@@ -1,0 +1,22 @@
+---
+EthPortTable:
+  command: 'show interface '
+  table: TABLE_interface
+  row: ROW_interface
+
+
+EthPortView:
+  name: interface
+  state: state
+  admin_status: admin_state
+  mac_addr: eth_hw_addr
+  mtu: eth_mtu
+  duplex: eth_duplex
+  speed: eth_speed
+  runts: eth_runts
+  giants: eth_giants
+  crc_errors: eth_crc
+  #overruns: eth_overrun
+  #underruns: eth_underrun
+  #indiscards: eth_indiscard
+  #outdiscards: eth_outdiscard
