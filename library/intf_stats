@@ -4,7 +4,7 @@ import xmltodict
 import json
 import yaml
 import sys
-from nxapi.device1 import Device
+from nxapi.device import Device
 from nxapi.widgets import ethports
 
 def main():
