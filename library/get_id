@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+
+from random import randint
+
+def main():
+  module = AnsibleModule(
+    argument_spec = dict(
+    ),
+    supports_check_mode = False
+  )
+
+  
+  key_id = '#' + str(randint(2,10000))
+
+  module.exit_json(msg=key_id)
+  
+from ansible.module_utils.basic import *  
+main()
