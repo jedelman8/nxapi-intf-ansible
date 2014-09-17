@@ -6,7 +6,7 @@
   gather_facts: no
 
   vars:
-    key_id: 'interface_status_pull'
+    key_id: 'nxapi_intf_091714'
 
   pre_tasks:
 
