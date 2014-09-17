@@ -1,0 +1,19 @@
+************************************************************
+
+Interface Statistics for 192.168.200.50 
+
+************************************************************
+
+Interface Ethernet1/4
+     giants: 0 
+     name: Ethernet1/4 
+     duplex: auto 
+     admin_status: up 
+     mtu: 1500 
+     state: down 
+     mac_addr: 5087.89a1.d8d9 
+     crc_errors: 0 
+     speed: auto-speed 
+     runts: 0 
+       
+

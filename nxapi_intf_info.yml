@@ -13,5 +13,11 @@
       interface=Ethernet1/4
     register: results  
 
+
+  - debug: msg={{ results.stats.mac_addr }}
+  #- debug: msg="{{ item.value.name }} has {{item.value.crc_errors }} crc errors!"
+  #  with_dict: results
+  #  when: item.key == 'stats'
+
   - name: prepare report based on template
     template: src=templates/interface_stats.j2 dest=reports/{{ inventory_hostname }}.stats

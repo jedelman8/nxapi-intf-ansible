@@ -4,13 +4,8 @@ Interface Statistics for {{ inventory_hostname }}
 
 ************************************************************
 
-{% for key, value in results.stats.iteritems() %}
-Interface {{ key }}
-  {% for k,v in value.iteritems() %}
+Interface {{ results.stats.name }}
+  {% for k,v in results.stats() %}
    {{ k }}: {{ v }} 
   {% endfor %}     
 {% endfor %}
-
-
-
-

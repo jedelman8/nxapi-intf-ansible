@@ -45,7 +45,7 @@ def main():
 
   #print interfaces['Ethernet1/1']['mac_addr']
 
-  module.exit_json(stats=interfaces)
+  module.exit_json(stats=interfaces[interface])
   
 from ansible.module_utils.basic import *  
 main()
