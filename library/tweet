@@ -30,9 +30,10 @@ def main():
   api = twitter.Api(consumer_key=auth['ck'],consumer_secret=auth['cs'], \
     access_token_key=auth['atk'], access_token_secret=auth['ats'])
 
-  status = api.PostUpdate(msg + ' ' + ' key:' + key_id)  
+  status = api.PostUpdate(msg + ' ' + ' #key:' + key_id)  
 
   module.exit_json(msg='tweet sent')
   
 from ansible.module_utils.basic import *  
 main()
+
