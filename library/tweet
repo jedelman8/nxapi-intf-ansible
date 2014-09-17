@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+
+import twitter
+
+def main():
+  module = AnsibleModule(
+    argument_spec = dict(
+      msg=dict(required=True),
+      auth=dict(required=True),
+      key=dict(required=True),
+
+    ),
+    supports_check_mode = False
+  )
+
+  msg = module.params['msg']
+  auth1 = module.params['auth']
+  key_id = module.params['key']
+  creds = auth1.split(',')
+
+  auth = {}
+  auth['ck'] = creds[0]
+  auth['cs'] = creds[1]
+  auth['atk'] = creds[2]
+  auth['ats'] = creds[3]
+
+
+  api = twitter.Api()
+  
+  api = twitter.Api(consumer_key=auth['ck'],consumer_secret=auth['cs'], \
+    access_token_key=auth['atk'], access_token_secret=auth['ats'])
+
+  status = api.PostUpdate(msg + ' ' + ' key:' + key_id)  
+
+  module.exit_json(msg='tweet sent')
+  
+from ansible.module_utils.basic import *  
+main()
