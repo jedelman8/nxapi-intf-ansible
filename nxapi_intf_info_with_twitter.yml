@@ -5,15 +5,13 @@
   connection: local
   gather_facts: no
 
+  vars:
+    key_id: 'interface_status_pull'
 
   pre_tasks:
 
-  - name: get random id for tweets 
-    get_id:
-    register: key_id
-
   - name: tweet start of playbook
-    tweet: msg='@jedelman8 - start of playbook execution' auth={{ creds }} key={{ key_id.msg }}
+    tweet: msg='@jedelman8 - start of playbook execution' auth={{ creds }} key={{ key_id }}
 
 
   tasks:
@@ -27,7 +25,7 @@
   - tweet: 
       msg="@jedelman8 {{ inventory_hostname }}-- {{ results.stats.name }} has {{results.stats.crc_errors }} crc errors"
       auth={{ creds }}
-      key={{ key_id.msg }}
+      key={{ key_id }}
 
 
   - name: prepare report based on template
@@ -37,4 +35,4 @@
   post_tasks:
 
   - name: tweet end status of playbook
-    tweet: msg='@jedelman8 - end of playbook' auth={{ creds }} key={{ key_id.msg }}
+    tweet: msg='@jedelman8 - end of playbook' auth={{ creds }} key={{ key_id }}
