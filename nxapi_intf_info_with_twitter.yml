@@ -6,14 +6,14 @@
   gather_facts: no
 
 
-#  pre_tasks:
+  pre_tasks:
 
-#  - name: get random id for tweets 
-#    get_id:
-#    register: key_id
+  - name: get random id for tweets 
+    get_id:
+    register: key_id
 
-#  - name: tweet start of playbook
-#    tweet: msg='@jedelman8 - start of playbook execution' auth={{ creds }} key={{ key_id.msg }}
+  - name: tweet start of playbook
+    tweet: msg='@jedelman8 - start of playbook execution' auth={{ creds }} key={{ key_id.msg }}
 
 
   tasks:
@@ -22,20 +22,19 @@
     intf_stats: 
       ip={{ inventory_hostname }}
       interface=Ethernet1/4
-    register: results  
+    register: results
 
- # - tweet: 
- #     msg="@jedelman8 {{ inventory_hostname }}-- {{ item.value.name }} has {{item.value.crc_errors }} crc errors"
- #     auth={{ creds }}
- #     key={{ key_id.msg }}
- #   with_dict: results
- #   when: item.key == 'stats'
+  - tweet: 
+      msg="@jedelman8 {{ inventory_hostname }}-- {{ results.stats.name }} has {{results.stats.crc_errors }} crc errors"
+      auth={{ creds }}
+      key={{ key_id.msg }}
+
 
   - name: prepare report based on template
     template: src=templates/interface_stats.j2 dest=reports/{{ inventory_hostname }}.stats
 
 
-#  post_tasks:
+  post_tasks:
 
-#  - name: tweet end status of playbook
-#    tweet: msg='@jedelman8 - end of playbook' auth={{ creds }} key={{ key_id.msg }}
+  - name: tweet end status of playbook
+    tweet: msg='@jedelman8 - end of playbook' auth={{ creds }} key={{ key_id.msg }}
